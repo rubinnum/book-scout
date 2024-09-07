@@ -1,21 +1,34 @@
 package com.bookscout.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String author;
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     private String publishedDate;
     private Integer pageCount;
     private String thumbnail;
+
+    public Book(String title, String author, String description, String publishedDate, Integer pageCount, String thumbnail) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.publishedDate = publishedDate;
+        this.pageCount = pageCount;
+        this.thumbnail = thumbnail;
+    }
 }
