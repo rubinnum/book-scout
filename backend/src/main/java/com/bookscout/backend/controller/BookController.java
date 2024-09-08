@@ -20,7 +20,7 @@ public class BookController {
     }
 
     @GetMapping("/books/{subject}")
-    public List<Book> getBooksBySubject(@PathVariable String subject) throws JsonProcessingException {
+    public List<Book> getBooksBySubject(@PathVariable String subject) {
         return bookService.getBooksBySubject(subject);
     }
 }

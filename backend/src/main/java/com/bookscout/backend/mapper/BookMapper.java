@@ -10,17 +10,16 @@ import java.util.function.Function;
 public class BookMapper implements Function<BookDTO, Book> {
     @Override
     public Book apply(BookDTO bookDTO) {
-        String author = "Unknown";
-        if (bookDTO.getVolumeInfo().getAuthors() != null) {
-            author = bookDTO.getVolumeInfo().getAuthors().get(0);
-        }
+        String author = (bookDTO.getVolumeInfo().getAuthors() != null) ? bookDTO.getVolumeInfo().getAuthors().get(0) : "Unknown";
+        String thumbnail = (bookDTO.getVolumeInfo().getImageLinks() != null) ? bookDTO.getVolumeInfo().getImageLinks().getThumbnail() : "";
+
         return new Book(
                 bookDTO.getVolumeInfo().getTitle(),
                 author,
                 bookDTO.getVolumeInfo().getDescription(),
                 bookDTO.getVolumeInfo().getPublishedDate(),
                 bookDTO.getVolumeInfo().getPageCount(),
-                bookDTO.getVolumeInfo().getImageLinks().getThumbnail()
+                thumbnail
         );
     }
 }

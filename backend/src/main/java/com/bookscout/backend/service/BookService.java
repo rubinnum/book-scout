@@ -7,11 +7,13 @@ import com.bookscout.backend.repository.BookRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class BookService {
     private final GoogleBooksService googleBooksService;
     private final BookRepository bookRepository;
@@ -23,19 +25,24 @@ public class BookService {
         this.bookMapper = bookMapper;
     }
 
-    public List<Book> getBooksBySubject(String subject) throws JsonProcessingException {
+    public List<Book> getBooksBySubject(String subject) {
         bookRepository.deleteAll();
         String response = googleBooksService.searchBooksBySubject(subject);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode root = objectMapper.readTree(response);
-        JsonNode items = root.path("items");
+        try {
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode items = root.path("items");
 
-        for (JsonNode item : items) {
-            BookDTO bookDTO = objectMapper.treeToValue(item, BookDTO.class);
-            Book book = bookMapper.apply(bookDTO);
-            bookRepository.save(book);
+            for (JsonNode item : items) {
+                BookDTO bookDTO = objectMapper.treeToValue(item, BookDTO.class);
+                Book book = bookMapper.apply(bookDTO);
+                bookRepository.save(book);
+            }
+        } catch (JsonProcessingException e) {
+            log.error("JSON was not processed");
         }
+
         return bookRepository.findAll();
     }
 }
