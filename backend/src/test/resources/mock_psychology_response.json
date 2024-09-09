@@ -1,0 +1,218 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 200,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "raYsDwAAQBAJ",
+      "etag": "61C3DHu591U",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/raYsDwAAQBAJ",
+      "volumeInfo": {
+        "title": "Alcohol Use and Sexual Risk Behaviour",
+        "subtitle": "A Cross-cultural Study in Eight Countries",
+        "publisher": "World Health Organization",
+        "publishedDate": "2005-07",
+        "description": "\"The link between alcohol use and sexual behaviour has serious implications for the health of populations due to the advent of HIV infection. WHO coordinated a multi-country study to identify factors related to risky sexual behaviour among alcohol users in diverse cultural settings. The countries involved included: Belarus, India, Mexico, Kenya, Romania, the Russian Federation, South Africa and Zambia.\"--Back cover.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9789241562898"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "9241562897"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": true
+        },
+        "pageCount": 148,
+        "printType": "BOOK",
+        "categories": [
+          "Business & Economics"
+        ],
+        "maturityRating": "MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.1.1.0.preview.1",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=raYsDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=raYsDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.pl/books?id=raYsDwAAQBAJ&printsec=frontcover&dq=subject:psychology&hl=&cd=1&source=gbs_api",
+        "infoLink": "http://books.google.pl/books?id=raYsDwAAQBAJ&dq=subject:psychology&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Alcohol_Use_and_Sexual_Risk_Behaviour.html?hl=&id=raYsDwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "PL",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "PL",
+        "viewability": "ALL_PAGES",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.pl/books/download/Alcohol_Use_and_Sexual_Risk_Behaviour-sample-pdf.acsm?id=raYsDwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=raYsDwAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "4qKbBQAAQBAJ",
+      "etag": "Ux9q4k3sR+A",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/4qKbBQAAQBAJ",
+      "volumeInfo": {
+        "title": "Great Catastrophe",
+        "subtitle": "Armenians and Turks in the Shadow of Genocide",
+        "authors": [
+          "Thomas De Waal"
+        ],
+        "publisher": "Oxford University Press, USA",
+        "publishedDate": "2015",
+        "description": "Drawing on archival sources, reportage and moving personal stories, de Waal tells the full story of Armenian-Turkish relations since the Genocide in all its extraordinary twists and turns. He looks behind the propaganda to examine the realities of a terrible historical crime and the divisive \"politics of genocide\" it produced.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780199350698"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0199350698"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": true
+        },
+        "pageCount": 321,
+        "printType": "BOOK",
+        "categories": [
+          "History"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "1.2.2.0.preview.1",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=4qKbBQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=4qKbBQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.pl/books?id=4qKbBQAAQBAJ&printsec=frontcover&dq=subject:psychology&hl=&cd=2&source=gbs_api",
+        "infoLink": "http://books.google.pl/books?id=4qKbBQAAQBAJ&dq=subject:psychology&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Great_Catastrophe.html?hl=&id=4qKbBQAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "PL",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "PL",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.pl/books/download/Great_Catastrophe-sample-pdf.acsm?id=4qKbBQAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=4qKbBQAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "M5rPOgAACAAJ",
+      "etag": "zwQXvWYsYyA",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/M5rPOgAACAAJ",
+      "volumeInfo": {
+        "title": "Como Ganar Amigos E Influir Sobre Las Personas",
+        "authors": [
+          "Dale Carnegie"
+        ],
+        "publisher": "Random House Espanol",
+        "publishedDate": "2000",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "9681104544"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9789681104542"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 0,
+        "printType": "BOOK",
+        "categories": [
+          "Psychology, Applied"
+        ],
+        "averageRating": 4,
+        "ratingsCount": 10,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=M5rPOgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=M5rPOgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "es",
+        "previewLink": "http://books.google.pl/books?id=M5rPOgAACAAJ&dq=subject:psychology&hl=&cd=3&source=gbs_api",
+        "infoLink": "http://books.google.pl/books?id=M5rPOgAACAAJ&dq=subject:psychology&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Como_Ganar_Amigos_E_Influir_Sobre_Las_Pe.html?hl=&id=M5rPOgAACAAJ"
+      },
+      "saleInfo": {
+        "country": "PL",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "PL",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=M5rPOgAACAAJ&hl=&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      }
+    }
+  ]
+}
