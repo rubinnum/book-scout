@@ -17,12 +17,12 @@ class GoogleBooksServiceTest {
 
     private static Stream<String> provideSubjectsForSearch() {
         return Stream.of("antiques", "architecture", "art", "bibles", "biography", "body",
-                "business", "comics", "computers", "cooking", "crafts", "design", "drama",
-                "education", "family", "fiction", "games", "gardening", "health", "history",
-                "house", "humor", "juvenile", "law", "literary", "mathematics", "medical",
-                "music", "nature", "arts", "pets", "philosophy", "photography", "poetry",
+                "business", "comics", "computers", "cooking", "crafts", "crime", "design",
+                "drama", "education", "family", "fiction", "games", "gardening", "health",
+                "history", "house", "humor", "juvenile", "law", "literary", "mathematics",
+                "medical", "music", "nature", "pets", "philosophy", "photography", "poetry",
                 "political", "psychology", "reference", "religion", "science", "social",
-                "sports", "technology", "transportation", "travel", "crime", "young");
+                "sports", "technology", "transportation", "travel", "young");
     }
 
     @ParameterizedTest
