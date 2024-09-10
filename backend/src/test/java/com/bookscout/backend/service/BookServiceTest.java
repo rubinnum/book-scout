@@ -24,13 +24,11 @@ class BookServiceTest {
     @Mock
     private GoogleBooksService googleBooksService;
 
-    @Mock
-    private BookMapper bookMapper;
-
     private BookService bookService;
 
     @BeforeEach
     void setUp() {
+        BookMapper bookMapper = new BookMapper();
         bookService = new BookService(googleBooksService, bookRepository, bookMapper);
     }
 
