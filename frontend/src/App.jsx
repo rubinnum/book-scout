@@ -7,6 +7,7 @@ import {Container} from "react-bootstrap";
 
 function App() {
     const [currentSubject, setCurrentSubject] = useState("");
+    const [books, setBooks] = useState([]);
 
     const categories = [
         "Antiques", "Architecture", "Art", "Bibles", "Biography", "Body",
@@ -21,7 +22,7 @@ function App() {
     return (
         <Container fluid className="p-0">
             <Header />
-            <SubjectsLayout categories={categories}></SubjectsLayout>
+            <SubjectsLayout setBooks={setBooks} setCurrentSubject={setCurrentSubject} categories={categories}></SubjectsLayout>
         </Container>
     )
 }
