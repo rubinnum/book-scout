@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import backend_api from "../api/backend_api.js";
 import {Button, Col, Container, Row} from "react-bootstrap";
+import {useOutletContext} from "react-router-dom";
 
-function SubjectsLayout({categories, setCurrentSubject, setBooks}) {
+function Home() {
+    const {categories, setCurrentSubject, setBooks} = useOutletContext();
+
     const [showAll, setShowAll] = useState(false);
     const displayedCategories = showAll ? categories : categories.slice(0, 20);
 
     const getBooksBySubject = async (subject) => {
-        const books = await backend_api.get(`/books/${subject}`);
-        setBooks(books);
+        const books = await backend_api.get(`/books/${subject.toLowerCase()}`);
+        setBooks(books.data);
         setCurrentSubject(subject);
     }
 
@@ -36,4 +39,4 @@ function SubjectsLayout({categories, setCurrentSubject, setBooks}) {
     );
 }
 
-export default SubjectsLayout;
+export default Home;

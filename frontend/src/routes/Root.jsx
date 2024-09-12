@@ -1,11 +1,11 @@
-import './App.css';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useState} from "react";
-import SubjectsLayout from "./components/subjectsLayout.jsx";
-import Header from './components/header.jsx';
 import {Container} from "react-bootstrap";
+import Header from "../components/Header.jsx";
+import {Outlet} from "react-router-dom";
 
-function App() {
+
+function Root() {
     const [currentSubject, setCurrentSubject] = useState("");
     const [books, setBooks] = useState([]);
 
@@ -21,10 +21,10 @@ function App() {
 
     return (
         <Container fluid className="p-0">
-            <Header />
-            <SubjectsLayout setBooks={setBooks} setCurrentSubject={setCurrentSubject} categories={categories}></SubjectsLayout>
+            <Header/>
+            <Outlet context={{categories, setCurrentSubject, setBooks}}/>
         </Container>
-    )
+    );
 }
 
-export default App
+export default Root;
