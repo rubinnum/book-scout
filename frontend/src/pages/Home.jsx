@@ -1,26 +1,22 @@
 import React, {useState} from 'react';
-import backend_api from "../api/backend_api.js";
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {useOutletContext} from "react-router-dom";
+import {Link, useOutletContext} from "react-router-dom";
 
 function Home() {
-    const {categories, setCurrentSubject, setBooks} = useOutletContext();
+    const {categories, setCurrentSubject} = useOutletContext();
 
     const [showAll, setShowAll] = useState(false);
     const displayedCategories = showAll ? categories : categories.slice(0, 20);
-
-    const getBooksBySubject = async (subject) => {
-        const books = await backend_api.get(`/books/${subject.toLowerCase()}`);
-        setBooks(books.data);
-        setCurrentSubject(subject);
-    }
 
     return (
         <Container className="mt-4">
             <Row>
                 {displayedCategories.map((category, index) => (
                     <Col xs={6} md={3} className="mb-4" key={index}>
-                        <Button variant="outline-light" className="w-100 p-3" onClick={() => {getBooksBySubject(category)}}>{category}</Button>
+                        <Link to={`/books/${category.toLowerCase()}`}
+                                className="btn btn-outline-light w-100 p-3"
+                                onClick={() => {setCurrentSubject(category)}}>{category}
+                        </Link>
                     </Col>
                 ))}
             </Row>
