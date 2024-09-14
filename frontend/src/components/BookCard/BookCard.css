@@ -1,0 +1,16 @@
+.book-card-wrapper {
+    width: 20rem;
+    height: 28rem;
+    background-color: #343a40;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+    overflow-y: auto
+}
+
+.book-card-img {
+    width: 128px;
+    height: 200px;
+    object-fit: contain;
+}
