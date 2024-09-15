@@ -15,7 +15,7 @@ services:
       timeout: 10s
 
   backend:
-    image: bookscout-backend
+    image: bookscout/backend:v1.0
     container_name: backend
     depends_on:
       mysqldb:
