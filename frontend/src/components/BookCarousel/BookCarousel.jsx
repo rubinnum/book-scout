@@ -28,6 +28,7 @@ function BookCarousel({books}) {
             <div className="book-carousel-container">
                 <BookCard book={books[currentIndex]} />
             </div>
+            
             <Button variant="secondary" onClick={handleNext} className="mt-4 rounded-circle" disabled={currentIndex === books.length - 1}>
                 <ChevronDown size={24} />
             </Button>
