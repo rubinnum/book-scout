@@ -1,14 +1,11 @@
 package com.bookscout.backend.controller;
 
 import com.bookscout.backend.dto.CategoriesDTO;
-import com.bookscout.backend.model.Category;
 import com.bookscout.backend.service.CategoryService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:5173")

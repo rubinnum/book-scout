@@ -2,12 +2,9 @@ package com.bookscout.backend.controller;
 
 import com.bookscout.backend.dto.BooksListDTO;
 import com.bookscout.backend.exception.WrongCategoryException;
-import com.bookscout.backend.model.Book;
 import com.bookscout.backend.service.BookService;
 import com.bookscout.backend.utilities.Helper;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:5173")
