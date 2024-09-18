@@ -2,6 +2,8 @@ package com.bookscout.backend.service;
 
 import com.bookscout.backend.dto.BookDTO;
 import com.bookscout.backend.mapper.BookMapper;
+import com.bookscout.backend.utilities.BookApiResponse;
+import com.bookscout.backend.mapper.BookApiResponseMapper;
 import com.bookscout.backend.model.Book;
 import com.bookscout.backend.repository.BookRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,15 +20,17 @@ import java.util.List;
 public class BookService {
     private final GoogleBooksService googleBooksService;
     private final BookRepository bookRepository;
+    private final BookApiResponseMapper bookApiResponseMapper;
     private final BookMapper bookMapper;
 
-    public BookService(GoogleBooksService googleBooksService, BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(GoogleBooksService googleBooksService, BookRepository bookRepository, BookApiResponseMapper bookApiResponseMapper, BookMapper bookMapper) {
         this.googleBooksService = googleBooksService;
         this.bookRepository = bookRepository;
+        this.bookApiResponseMapper = bookApiResponseMapper;
         this.bookMapper = bookMapper;
     }
 
-    public List<Book> getBooksBySubject(String subject) {
+    public List<BookDTO> getBooksBySubject(String subject) {
         bookRepository.deleteAll();
         String response = googleBooksService.searchBooksBySubject(subject);
 
@@ -35,22 +40,29 @@ public class BookService {
             JsonNode items = root.path("items");
 
             for (JsonNode item : items) {
-                BookDTO bookDTO = objectMapper.treeToValue(item, BookDTO.class);
-                if (bookIsValid(bookDTO)) {
-                    Book book = bookMapper.apply(bookDTO);
+                BookApiResponse bookApiResponse = objectMapper.treeToValue(item, BookApiResponse.class);
+                if (bookIsValid(bookApiResponse)) {
+                    Book book = bookApiResponseMapper.apply(bookApiResponse);
                     bookRepository.save(book);
                 }
             }
         } catch (JsonProcessingException e) {
             log.error("JSON was not processed");
         }
-
-        return bookRepository.findAll();
+        return getListOfBooksDTO(bookRepository.findAll());
     }
 
-    private boolean bookIsValid(BookDTO bookDTO) {
-        String bookLanguage = bookDTO.getVolumeInfo().getLanguage();
-        String description = bookDTO.getVolumeInfo().getDescription();
+    private boolean bookIsValid(BookApiResponse bookApiResponse) {
+        String bookLanguage = bookApiResponse.getVolumeInfo().getLanguage();
+        String description = bookApiResponse.getVolumeInfo().getDescription();
         return bookLanguage.equals("en") && description != null;
+    }
+
+    private List<BookDTO> getListOfBooksDTO(List<Book> booksList) {
+        List<BookDTO> booksDTOList = new ArrayList<>();
+        for (Book book : booksList) {
+            booksDTOList.add(bookMapper.apply(book));
+        }
+        return booksDTOList;
     }
 }

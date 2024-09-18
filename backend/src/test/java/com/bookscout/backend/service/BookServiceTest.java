@@ -1,6 +1,6 @@
 package com.bookscout.backend.service;
 
-import com.bookscout.backend.mapper.BookMapper;
+import com.bookscout.backend.mapper.BookApiResponseMapper;
 import com.bookscout.backend.model.Book;
 import com.bookscout.backend.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,8 +28,8 @@ class BookServiceTest {
 
     @BeforeEach
     void setUp() {
-        BookMapper bookMapper = new BookMapper();
-        bookService = new BookService(googleBooksService, bookRepository, bookMapper);
+        BookApiResponseMapper bookApiResponseMapper = new BookApiResponseMapper();
+        bookService = new BookService(googleBooksService, bookRepository, bookApiResponseMapper);
     }
 
     @Test

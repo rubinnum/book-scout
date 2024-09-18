@@ -7,22 +7,16 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 @Component
-public class BookMapper implements Function<BookDTO, Book> {
+public class BookMapper implements Function<Book, BookDTO> {
+
     @Override
-    public Book apply(BookDTO bookDTO) {
-        String author = (bookDTO.getVolumeInfo().getAuthors() != null)
-                ? bookDTO.getVolumeInfo().getAuthors().get(0)
-                : "Unknown";
-        String thumbnail = (bookDTO.getVolumeInfo().getImageLinks() != null)
-                ? (bookDTO.getVolumeInfo().getImageLinks().getThumbnail())
-                : "https://bookscout-backend.s3.eu-north-1.amazonaws.com/image_not_available.jpg";
-        return new Book(
-                bookDTO.getVolumeInfo().getTitle(),
-                author,
-                bookDTO.getVolumeInfo().getDescription(),
-                bookDTO.getVolumeInfo().getPublishedDate(),
-                bookDTO.getVolumeInfo().getPageCount(),
-                thumbnail
-        );
+    public BookDTO apply(Book book) {
+        return new BookDTO(
+                book.getTitle(),
+                book.getAuthor(),
+                book.getDescription(),
+                book.getPublishedDate(),
+                book.getPageCount(),
+                book.getThumbnail());
     }
 }
