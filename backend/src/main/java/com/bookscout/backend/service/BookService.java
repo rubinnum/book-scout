@@ -51,8 +51,6 @@ public class BookService {
     private boolean bookIsValid(BookDTO bookDTO) {
         String bookLanguage = bookDTO.getVolumeInfo().getLanguage();
         String description = bookDTO.getVolumeInfo().getDescription();
-        String thumbnail = bookDTO.getVolumeInfo().getImageLinks().getThumbnail();
-
-        return bookLanguage.equals("en") && description != null && thumbnail != null;
+        return bookLanguage.equals("en") && description != null;
     }
 }
