@@ -22,6 +22,7 @@ public class BookDTO {
         private Integer pageCount;
         private String publishedDate;
         private ImageLinks imageLinks;
+        private String language;
 
         @Getter
         @Setter

@@ -11,7 +11,6 @@ public class BookMapper implements Function<BookDTO, Book> {
     @Override
     public Book apply(BookDTO bookDTO) {
         String author = (bookDTO.getVolumeInfo().getAuthors() != null) ? bookDTO.getVolumeInfo().getAuthors().get(0) : "Unknown";
-        String thumbnail = (bookDTO.getVolumeInfo().getImageLinks() != null) ? bookDTO.getVolumeInfo().getImageLinks().getThumbnail() : "";
 
         return new Book(
                 bookDTO.getVolumeInfo().getTitle(),
@@ -19,7 +18,7 @@ public class BookMapper implements Function<BookDTO, Book> {
                 bookDTO.getVolumeInfo().getDescription(),
                 bookDTO.getVolumeInfo().getPublishedDate(),
                 bookDTO.getVolumeInfo().getPageCount(),
-                thumbnail
+                bookDTO.getVolumeInfo().getImageLinks().getThumbnail()
         );
     }
 }

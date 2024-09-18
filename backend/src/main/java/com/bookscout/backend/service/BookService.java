@@ -36,13 +36,23 @@ public class BookService {
 
             for (JsonNode item : items) {
                 BookDTO bookDTO = objectMapper.treeToValue(item, BookDTO.class);
-                Book book = bookMapper.apply(bookDTO);
-                bookRepository.save(book);
+                if (bookIsValid(bookDTO)) {
+                    Book book = bookMapper.apply(bookDTO);
+                    bookRepository.save(book);
+                }
             }
         } catch (JsonProcessingException e) {
             log.error("JSON was not processed");
         }
 
         return bookRepository.findAll();
+    }
+
+    private boolean bookIsValid(BookDTO bookDTO) {
+        String bookLanguage = bookDTO.getVolumeInfo().getLanguage();
+        String description = bookDTO.getVolumeInfo().getDescription();
+        String thumbnail = bookDTO.getVolumeInfo().getImageLinks().getThumbnail();
+
+        return bookLanguage.equals("en") && description != null && thumbnail != null;
     }
 }
