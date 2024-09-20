@@ -26,4 +26,8 @@ public class CategoryProgressService {
         categoryProgressRepository.save(categoryProgress);
         return categoryProgressMapper.apply(categoryProgress);
     }
+
+    public void updateCategoryProgress(Category category, Integer booksDisplayed) {
+        categoryProgressRepository.updateCategoryProgressesByCategory(category, booksDisplayed);
+    }
 }
