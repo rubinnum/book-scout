@@ -5,6 +5,7 @@ import com.bookscout.backend.mapper.CategoryProgressMapper;
 import com.bookscout.backend.model.Category;
 import com.bookscout.backend.model.CategoryProgress;
 import com.bookscout.backend.repository.CategoryProgressRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,11 @@ public class CategoryProgressService {
         this.categoryProgressMapper = categoryProgressMapper;
     }
 
+    public CategoryProgressDTO getCategoryByName(Category category) {
+        CategoryProgress categoryProgress = categoryProgressRepository.findByCategory(category);
+        return categoryProgressMapper.apply(categoryProgress);
+    }
+
     public CategoryProgressDTO initializeCategoryProgress(Category category) {
         CategoryProgress categoryProgress = CategoryProgress.builder().
                 category(category).
@@ -27,6 +33,7 @@ public class CategoryProgressService {
         return categoryProgressMapper.apply(categoryProgress);
     }
 
+    @Transactional
     public void updateCategoryProgress(Category category, Integer booksDisplayed) {
         categoryProgressRepository.updateCategoryProgressesByCategory(category, booksDisplayed);
     }

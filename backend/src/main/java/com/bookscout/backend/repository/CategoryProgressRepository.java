@@ -13,5 +13,7 @@ public interface CategoryProgressRepository extends JpaRepository<CategoryProgre
     @Modifying
     @Query("update CategoryProgress cp set cp.booksDisplayed = :booksDisplayed where cp.category = :category")
     void updateCategoryProgressesByCategory(@Param("category") Category category, @Param("booksDisplayed") Integer booksDisplayed);
+
+    CategoryProgress findByCategory(Category categoryName);
 }
 
