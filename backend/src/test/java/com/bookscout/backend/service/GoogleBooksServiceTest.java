@@ -2,7 +2,6 @@ package com.bookscout.backend.service;
 
 import com.bookscout.backend.model.Category;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -37,9 +36,9 @@ class GoogleBooksServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideSubjectsForSearch")
-    public void searchBooksBySubjectIsNotEmpty(String subject) {
+    public void fetchBooksBySubjectIsNotEmpty(String subject) {
         // When
-        String response = googleBooksService.searchBooksBySubject(subject);
+        String response = googleBooksService.fetchBooksBySubject(subject, 0);
 
         // Then
         assertThat(response).doesNotContain("totalItems\": 0");

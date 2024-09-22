@@ -15,12 +15,13 @@ public class GoogleBooksService {
         this.googleBooksRestClient = googleBooksRestClient;
     }
 
-    public String searchBooksBySubject(String subject) {
+    public String fetchBooksBySubject(String subject, Integer startIndex) {
         return googleBooksRestClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/volumes")
-                        .queryParam("q", String.format("subject:%s", subject))
                         .queryParam("key", apiKey)
+                        .queryParam("q", String.format("subject:%s", subject))
+                        .queryParam("startIndex", startIndex)
                         .queryParam("maxResults", 40)
                         .queryParam("langRestrict", "en")
                         .build()

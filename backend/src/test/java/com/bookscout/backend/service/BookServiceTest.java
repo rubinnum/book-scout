@@ -1,6 +1,7 @@
 package com.bookscout.backend.service;
 
 import com.bookscout.backend.mapper.BookApiResponseMapper;
+import com.bookscout.backend.mapper.BookMapper;
 import com.bookscout.backend.model.Book;
 import com.bookscout.backend.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,19 +25,22 @@ class BookServiceTest {
     @Mock
     private GoogleBooksService googleBooksService;
 
+    @Mock
+    private BookMapper bookMapper;
+
     private BookService bookService;
 
     @BeforeEach
     void setUp() {
         BookApiResponseMapper bookApiResponseMapper = new BookApiResponseMapper();
-        bookService = new BookService(googleBooksService, bookRepository, bookApiResponseMapper);
+        bookService = new BookService(googleBooksService, bookRepository, bookApiResponseMapper, bookMapper);
     }
 
     @Test
     void booksAreSavedIntoDatabaseAndReturned() throws IOException {
         // Given
         String subject = "psychology";
-        when(googleBooksService.searchBooksBySubject(subject)).thenReturn(getMockResponse());
+        when(googleBooksService.fetchBooksBySubject(subject, 0)).thenReturn(getMockResponse());
 
         // When
         bookService.getBooksBySubject(subject);

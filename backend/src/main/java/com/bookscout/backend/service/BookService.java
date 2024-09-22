@@ -31,9 +31,15 @@ public class BookService {
     }
 
     public List<BookDTO> getBooksBySubject(String subject) {
-        bookRepository.deleteAll();
-        String response = googleBooksService.searchBooksBySubject(subject);
+        if (bookRepository.count() == 0) {
+            fetchNewBatchOfBooks(subject, 0);
+        }
 
+        return getListOfBooksDTO(bookRepository.findAll());
+    }
+
+    private void fetchNewBatchOfBooks(String subject, Integer startIndex) {
+        String response = googleBooksService.fetchBooksBySubject(subject, startIndex);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode root = objectMapper.readTree(response);
@@ -49,7 +55,6 @@ public class BookService {
         } catch (JsonProcessingException e) {
             log.error("JSON was not processed");
         }
-        return getListOfBooksDTO(bookRepository.findAll());
     }
 
     private boolean bookIsValid(BookApiResponse bookApiResponse) {
