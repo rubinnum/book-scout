@@ -1,5 +1,6 @@
 package com.bookscout.backend.dto;
 
+import com.bookscout.backend.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,4 +13,5 @@ public class BookDTO {
     private String publishedDate;
     private Integer pageCount;
     private String thumbnail;
+    private Category category;
 }

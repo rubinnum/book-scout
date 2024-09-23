@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class BookController {
     private final BookService bookService;
+    private final Helper helper;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, Helper helper) {
         this.bookService = bookService;
+        this.helper = helper;
     }
 
     @GetMapping("/books/{subject}")
     public BooksListDTO getBooksBySubject(@PathVariable String subject) {
-        if (!Helper.isValidSubject(subject)) {
+        if (helper.isValidSubject(subject)) {
             throw new WrongCategoryException("Oops, the category " + subject + " does not exist");
         }
         return new BooksListDTO(bookService.getBooksBySubject(subject));

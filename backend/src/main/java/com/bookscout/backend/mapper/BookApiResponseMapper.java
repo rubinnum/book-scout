@@ -15,7 +15,7 @@ public class BookApiResponseMapper implements Function<BookApiResponse, Book> {
                 : "Unknown";
         String thumbnail = (bookApiResponse.getVolumeInfo().getImageLinks() != null)
                 ? (bookApiResponse.getVolumeInfo().getImageLinks().getThumbnail())
-                : "https://bookscout-backend.s3.eu-north-1.amazonaws.com/image_not_available.jpg";
+                : "https://i.ibb.co/RY7SFkV/image-not-available.jpg";
         return new Book(
                 bookApiResponse.getVolumeInfo().getTitle(),
                 author,

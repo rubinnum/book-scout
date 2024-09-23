@@ -25,16 +25,16 @@ public class CategoryProgressController {
         return categoryProgressService.getCategoryByName(category);
     }
 
-    @PostMapping("/progress/{categoryName}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public CategoryProgressDTO addCategoryProgress(@PathVariable String categoryName) {
-        Category category = categoryService.getCategoryByName(categoryName);
-        return categoryProgressService.initializeCategoryProgress(category);
-    }
+//    @PostMapping("/progress/{categoryName}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public CategoryProgressDTO addCategoryProgress(@PathVariable String categoryName) {
+//        Category category = categoryService.getCategoryByName(categoryName);
+//        return categoryProgressService.initializeCategoryProgress(category);
+//    }
 
     @PutMapping("/progress/{categoryName}")
-    public void updateCategoryProgress(@PathVariable String categoryName, @RequestParam Integer booksDisplayed) {
+    public void updateDisplayedBooksProgress(@PathVariable String categoryName, @RequestParam int booksDisplayed) {
         Category category = categoryService.getCategoryByName(categoryName);
-        categoryProgressService.updateCategoryProgress(category, booksDisplayed);
+        categoryProgressService.updateDisplayedBooksProgressByCategory(category, booksDisplayed);
     }
 }

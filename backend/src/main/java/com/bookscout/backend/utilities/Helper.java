@@ -10,16 +10,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class Helper {
-
-    private final CategoryService categoryService;
-    private static List<String> subjectsList;
+    private final List<String> subjectsList;
 
     public Helper(CategoryService categoryService) {
-        this.categoryService = categoryService;
-        subjectsList = categoryService.getAllCategories().stream().map(Category::getName).collect(Collectors.toList());
+        this.subjectsList = categoryService.getAllCategories().stream().map(Category::getName).collect(Collectors.toList());
     }
 
-    public static boolean isValidSubject(String subject) {
+    public boolean isValidSubject(String subject) {
         return (subjectsList.contains(subject));
     }
 }

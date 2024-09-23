@@ -17,6 +17,7 @@ public class BookMapper implements Function<Book, BookDTO> {
                 book.getDescription(),
                 book.getPublishedDate(),
                 book.getPageCount(),
-                book.getThumbnail());
+                book.getThumbnail(),
+                book.getCategory());
     }
 }

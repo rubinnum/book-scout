@@ -10,9 +10,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryProgressRepository extends JpaRepository<CategoryProgress, Long> {
+
     @Modifying
     @Query("update CategoryProgress cp set cp.booksDisplayed = :booksDisplayed where cp.category = :category")
-    void updateCategoryProgressesByCategory(@Param("category") Category category, @Param("booksDisplayed") Integer booksDisplayed);
+    void updateDisplayedBooks(@Param("category") Category category, @Param("booksDisplayed") int booksDisplayed);
+
+    @Modifying
+    @Query("update CategoryProgress cp set cp.booksFetched = :booksFetched where cp.category = :category")
+    void updateFetchedBooks(Category category, int booksFetched);
 
     CategoryProgress findByCategory(Category categoryName);
 }

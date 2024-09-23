@@ -2,6 +2,7 @@ package com.bookscout.backend.service;
 
 import com.bookscout.backend.dto.BookDTO;
 import com.bookscout.backend.mapper.BookMapper;
+import com.bookscout.backend.model.Category;
 import com.bookscout.backend.utilities.BookApiResponse;
 import com.bookscout.backend.mapper.BookApiResponseMapper;
 import com.bookscout.backend.model.Book;
@@ -22,17 +23,24 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookApiResponseMapper bookApiResponseMapper;
     private final BookMapper bookMapper;
+    private final CategoryService categoryService;
+    private final CategoryProgressService categoryProgressService;
 
-    public BookService(GoogleBooksService googleBooksService, BookRepository bookRepository, BookApiResponseMapper bookApiResponseMapper, BookMapper bookMapper) {
+    public BookService(GoogleBooksService googleBooksService, BookRepository bookRepository, BookApiResponseMapper bookApiResponseMapper, BookMapper bookMapper, CategoryService categoryService, CategoryProgressService categoryProgressService) {
         this.googleBooksService = googleBooksService;
         this.bookRepository = bookRepository;
         this.bookApiResponseMapper = bookApiResponseMapper;
         this.bookMapper = bookMapper;
+        this.categoryService = categoryService;
+        this.categoryProgressService = categoryProgressService;
     }
 
     public List<BookDTO> getBooksBySubject(String subject) {
         if (bookRepository.count() == 0) {
             fetchNewBatchOfBooks(subject, 0);
+            Category category = categoryService.getCategoryByName(subject);
+            int numberOfFetchedBooks = bookRepository.getTheNumberOfFetchedBooksByCategory(category);
+            categoryProgressService.initializeCategoryProgress(category, numberOfFetchedBooks);
         }
 
         return getListOfBooksDTO(bookRepository.findAll());
@@ -49,6 +57,8 @@ public class BookService {
                 BookApiResponse bookApiResponse = objectMapper.treeToValue(item, BookApiResponse.class);
                 if (bookIsValid(bookApiResponse)) {
                     Book book = bookApiResponseMapper.apply(bookApiResponse);
+                    Category category = categoryService.getCategoryByName(subject);
+                    book.setCategory(category);
                     bookRepository.save(book);
                 }
             }

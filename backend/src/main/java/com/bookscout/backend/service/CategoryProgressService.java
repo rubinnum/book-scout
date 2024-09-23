@@ -23,18 +23,22 @@ public class CategoryProgressService {
         return categoryProgressMapper.apply(categoryProgress);
     }
 
-    public CategoryProgressDTO initializeCategoryProgress(Category category) {
+    public void initializeCategoryProgress(Category category, int booksFetched) {
         CategoryProgress categoryProgress = CategoryProgress.builder().
                 category(category).
-                booksFetched(0).
+                booksFetched(booksFetched).
                 booksDisplayed(0).
                 build();
         categoryProgressRepository.save(categoryProgress);
-        return categoryProgressMapper.apply(categoryProgress);
     }
 
     @Transactional
-    public void updateCategoryProgress(Category category, Integer booksDisplayed) {
-        categoryProgressRepository.updateCategoryProgressesByCategory(category, booksDisplayed);
+    public void updateDisplayedBooksProgressByCategory(Category category, int booksDisplayed) {
+        categoryProgressRepository.updateDisplayedBooks(category, booksDisplayed);
+    }
+
+    @Transactional
+    public void updateFetchedBooksProgressByCategory(Category category, int booksFetched) {
+        categoryProgressRepository.updateFetchedBooks(category, booksFetched);
     }
 }
