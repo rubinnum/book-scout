@@ -24,12 +24,29 @@ public class CategoryProgressService {
     }
 
     public void initializeCategoryProgress(Category category, int booksFetched) {
-        CategoryProgress categoryProgress = CategoryProgress.builder().
-                category(category).
-                booksFetched(booksFetched).
-                booksDisplayed(0).
-                build();
+        CategoryProgress categoryProgress = CategoryProgress.builder()
+                .category(category)
+                .booksFetched(booksFetched)
+                .booksDisplayed(0)
+                .fetchesNumber(1)
+                .build();
         categoryProgressRepository.save(categoryProgress);
+    }
+
+    public int getTheNumberOfDisplayedBooks(Category category) {
+        return categoryProgressRepository.findDisplayedBooks(category);
+    }
+
+    public int getTheNumberOfFetchedBooks(Category category) {
+        return categoryProgressRepository.findFetchedBooks(category);
+    }
+
+    public int getTheFetchesNumber(Category category) {
+        return categoryProgressRepository.findFetchesNumber(category);
+    }
+
+    public boolean existsByCategory(Category category) {
+        return categoryProgressRepository.existsByCategory(category);
     }
 
     @Transactional
@@ -38,7 +55,7 @@ public class CategoryProgressService {
     }
 
     @Transactional
-    public void updateFetchedBooksProgressByCategory(Category category, int booksFetched) {
-        categoryProgressRepository.updateFetchedBooks(category, booksFetched);
+    public void updateFetchedBooksAndFetchesNumber(Category category, int booksFetched, int fetchesNumber) {
+        categoryProgressRepository.updateFetchedBooksAndFetchesNumber(category, booksFetched, fetchesNumber);
     }
 }

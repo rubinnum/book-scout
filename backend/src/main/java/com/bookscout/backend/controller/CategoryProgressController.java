@@ -4,7 +4,6 @@ import com.bookscout.backend.dto.CategoryProgressDTO;
 import com.bookscout.backend.model.Category;
 import com.bookscout.backend.service.CategoryProgressService;
 import com.bookscout.backend.service.CategoryService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,13 +23,6 @@ public class CategoryProgressController {
         Category category = categoryService.getCategoryByName(categoryName);
         return categoryProgressService.getCategoryByName(category);
     }
-
-//    @PostMapping("/progress/{categoryName}")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public CategoryProgressDTO addCategoryProgress(@PathVariable String categoryName) {
-//        Category category = categoryService.getCategoryByName(categoryName);
-//        return categoryProgressService.initializeCategoryProgress(category);
-//    }
 
     @PutMapping("/progress/{categoryName}")
     public void updateDisplayedBooksProgress(@PathVariable String categoryName, @RequestParam int booksDisplayed) {

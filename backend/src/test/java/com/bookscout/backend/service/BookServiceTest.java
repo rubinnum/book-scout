@@ -30,10 +30,16 @@ class BookServiceTest {
 
     private BookService bookService;
 
+    @Mock
+    private CategoryService categoryService;
+
+    @Mock
+    private CategoryProgressService categoryProgressService;
+
     @BeforeEach
     void setUp() {
         BookApiResponseMapper bookApiResponseMapper = new BookApiResponseMapper();
-        bookService = new BookService(googleBooksService, bookRepository, bookApiResponseMapper, bookMapper);
+        bookService = new BookService(googleBooksService, bookRepository, bookApiResponseMapper, bookMapper, categoryService, categoryProgressService);
     }
 
     @Test

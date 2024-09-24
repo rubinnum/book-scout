@@ -1,12 +1,12 @@
 package com.bookscout.backend.service;
 
 import com.bookscout.backend.dto.BookDTO;
-import com.bookscout.backend.mapper.BookMapper;
-import com.bookscout.backend.model.Category;
-import com.bookscout.backend.utilities.BookApiResponse;
 import com.bookscout.backend.mapper.BookApiResponseMapper;
+import com.bookscout.backend.mapper.BookMapper;
 import com.bookscout.backend.model.Book;
+import com.bookscout.backend.model.Category;
 import com.bookscout.backend.repository.BookRepository;
+import com.bookscout.backend.utilities.BookApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,19 +36,37 @@ public class BookService {
     }
 
     public List<BookDTO> getBooksBySubject(String subject) {
-        if (bookRepository.count() == 0) {
-            fetchNewBatchOfBooks(subject, 0);
-            Category category = categoryService.getCategoryByName(subject);
-            int numberOfFetchedBooks = bookRepository.getTheNumberOfFetchedBooksByCategory(category);
+        Category category = categoryService.getCategoryByName(subject);
+        int currentDisplayedBooks = 0;
+
+        if (!categoryProgressService.existsByCategory(category)) {
+            int numberOfFetchedBooks = fetchNewBatchOfBooks(subject, 0);
+            bookRepository.countBooksByCategory(category);
             categoryProgressService.initializeCategoryProgress(category, numberOfFetchedBooks);
         }
+        else {
+            int currentFetchedBooks = categoryProgressService.getTheNumberOfFetchedBooks(category);
+            currentDisplayedBooks = categoryProgressService.getTheNumberOfDisplayedBooks(category);
 
-        return getListOfBooksDTO(bookRepository.findAll());
+            if (currentDisplayedBooks >= currentFetchedBooks * 0.8) {
+                int currentFetches = categoryProgressService.getTheFetchesNumber(category);
+                int googleBooksApiStartIndex = currentFetches * 40;
+                int justFetchedBooks = fetchNewBatchOfBooks(subject, googleBooksApiStartIndex);
+
+                int numberOfFetchedBooks = currentFetchedBooks + justFetchedBooks;
+                categoryProgressService.updateFetchedBooksAndFetchesNumber(category, numberOfFetchedBooks, currentFetches + 1);
+            }
+        }
+
+        return getListOfBooksDTO(bookRepository.findTenNotDisplayedBooksByCategory(category.getId(), currentDisplayedBooks));
     }
 
-    private void fetchNewBatchOfBooks(String subject, Integer startIndex) {
+    private int fetchNewBatchOfBooks(String subject, Integer startIndex) {
         String response = googleBooksService.fetchBooksBySubject(subject, startIndex);
+
+        int fetchedBooksCounter = 0;
         ObjectMapper objectMapper = new ObjectMapper();
+
         try {
             JsonNode root = objectMapper.readTree(response);
             JsonNode items = root.path("items");
@@ -60,11 +78,14 @@ public class BookService {
                     Category category = categoryService.getCategoryByName(subject);
                     book.setCategory(category);
                     bookRepository.save(book);
+                    fetchedBooksCounter += 1;
                 }
             }
         } catch (JsonProcessingException e) {
             log.error("JSON was not processed");
         }
+
+        return fetchedBooksCounter;
     }
 
     private boolean bookIsValid(BookApiResponse bookApiResponse) {

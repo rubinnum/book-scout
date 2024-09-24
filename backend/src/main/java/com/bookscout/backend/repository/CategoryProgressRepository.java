@@ -12,12 +12,23 @@ import org.springframework.stereotype.Repository;
 public interface CategoryProgressRepository extends JpaRepository<CategoryProgress, Long> {
 
     @Modifying
-    @Query("update CategoryProgress cp set cp.booksDisplayed = :booksDisplayed where cp.category = :category")
+    @Query("UPDATE CategoryProgress cp SET cp.booksDisplayed = :booksDisplayed WHERE cp.category = :category")
     void updateDisplayedBooks(@Param("category") Category category, @Param("booksDisplayed") int booksDisplayed);
 
     @Modifying
-    @Query("update CategoryProgress cp set cp.booksFetched = :booksFetched where cp.category = :category")
-    void updateFetchedBooks(Category category, int booksFetched);
+    @Query("UPDATE CategoryProgress cp SET cp.booksFetched = :booksFetched, cp.fetchesNumber = :fetchesNumber WHERE cp.category = :category")
+    void updateFetchedBooksAndFetchesNumber(Category category, int booksFetched, int fetchesNumber);
+
+    @Query("SELECT cp.booksDisplayed FROM CategoryProgress cp WHERE cp.category = :category")
+    int findDisplayedBooks(Category category);
+
+    @Query("SELECT cp.booksFetched FROM CategoryProgress cp WHERE cp.category = :category")
+    int findFetchedBooks(Category category);
+
+    @Query("SELECT cp.fetchesNumber FROM CategoryProgress cp WHERE cp.category = :category")
+    int findFetchesNumber(Category category);
+
+    boolean existsByCategory(Category category);
 
     CategoryProgress findByCategory(Category categoryName);
 }

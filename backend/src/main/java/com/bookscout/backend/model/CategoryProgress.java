@@ -27,10 +27,12 @@ public class CategoryProgress {
     private Category category;
     private Integer booksDisplayed;
     private Integer booksFetched;
+    private Integer fetchesNumber;
 
-    public CategoryProgress(Category category, Integer booksDisplayed, Integer booksFetched) {
+    public CategoryProgress(Category category, Integer booksDisplayed, Integer booksFetched, Integer fetchesNumber) {
         this.category = category;
         this.booksDisplayed = booksDisplayed;
         this.booksFetched = booksFetched;
+        this.fetchesNumber = fetchesNumber;
     }
 }
