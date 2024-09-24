@@ -24,7 +24,7 @@ public class BookController {
 
     @GetMapping("/books/{subject}")
     public BooksListDTO getBooksBySubject(@PathVariable String subject) {
-        if (helper.isValidSubject(subject)) {
+        if (!helper.isValidSubject(subject)) {
             throw new WrongCategoryException("Oops, the category " + subject + " does not exist");
         }
         return new BooksListDTO(bookService.getBooksBySubject(subject));
