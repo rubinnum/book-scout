@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {useOutletContext, useParams} from "react-router-dom";
 import backend_api from "../api/backend_api.js";
 import BookCarousel from "../components/BookCarousel/BookCarousel.jsx";
@@ -11,15 +11,20 @@ function CategoryBooks() {
 
     const [loading, setLoading] = useState(true);
 
+    const booksLoaded = useRef(false);
+
     const getBooksBySubject = async (subject) => {
         const response = await backend_api.get(`/books/${subject}`);
-        const loadedBooks = response.data.books
-        setBooks(prevBooks => [...prevBooks, ...loadedBooks]);
+        const loadedBooks = response.data.books;
+
+        const uniqueBooks = loadedBooks.filter((book) => !books.some((b) => b.title === book.title));
+        setBooks((prevBooks) => [...prevBooks, ...uniqueBooks]);
         setLoading(false);
     }
 
     useEffect(() => {
-        if (books.length === 0 || (currentIndex === books.length - 1)) {
+        if (!booksLoaded.current && (books.length === 0 || currentIndex === books.length - 1)) {
+            booksLoaded.current = true;
             getBooksBySubject(subject);
         }
     }, [currentIndex, subject, setBooks]);
