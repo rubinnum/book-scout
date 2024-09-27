@@ -1,22 +1,26 @@
 import './BookCarousel.css'
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Container} from "react-bootstrap";
 import BookCard from "../BookCard/BookCard.jsx";
 import {ChevronDown, ChevronUp} from 'lucide-react';
 import backend_api from "../../api/backend_api.js";
 
-function BookCarousel({books, currentIndex, setCurrentIndex, subject}) {
+function BookCarousel({books, currentIndex, setCurrentIndex, subject, batchesNumber}) {
 
     const updateDisplayedBooksProgress = async (subject) => {
-        console.log(await backend_api.put(`/progress/${subject}?booksDisplayed=${currentIndex + 1}`));
+        const booksDisplayed = (batchesNumber * 10) + (currentIndex + 1);
+        await backend_api.put(`/progress/${subject}?booksDisplayed=${booksDisplayed}`);
     }
+
+    useEffect(() => {
+        updateDisplayedBooksProgress(subject);
+    }, [currentIndex, subject]);
 
     const handleNext = () => {
         if (currentIndex < books.length - 1) {
             setCurrentIndex(currentIndex + 1);
         }
-        updateDisplayedBooksProgress(subject);
     };
 
     const handlePrevious = () => {
