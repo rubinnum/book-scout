@@ -38,6 +38,9 @@ function BookCarousel({books, currentIndex, setCurrentIndex, subject, batchesNum
             <div className="book-carousel-container">
                 <BookCard book={books[currentIndex]}/>
             </div>
+            <div className="book-carousel-container">
+                <BookCard book={books[currentIndex + 1]}/>
+            </div>
             <Button variant="secondary" onClick={handleNext} className="mt-4 rounded-circle">
                 <ChevronDown size={24}/>
             </Button>
