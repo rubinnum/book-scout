@@ -41,7 +41,6 @@ public class BookService {
 
         if (!categoryProgressService.existsByCategory(category)) {
             int numberOfFetchedBooks = fetchNewBatchOfBooks(subject, 0);
-            bookRepository.countBooksByCategory(category);
             categoryProgressService.initializeCategoryProgress(category, numberOfFetchedBooks);
         }
         else {
@@ -73,7 +72,7 @@ public class BookService {
 
             for (JsonNode item : items) {
                 BookApiResponse bookApiResponse = objectMapper.treeToValue(item, BookApiResponse.class);
-                if (bookIsValid(bookApiResponse)) {
+                if (bookIsValid(bookApiResponse) && bookIsUnique(bookApiResponse)) {
                     Book book = bookApiResponseMapper.apply(bookApiResponse);
                     Category category = categoryService.getCategoryByName(subject);
                     book.setCategory(category);
@@ -92,6 +91,11 @@ public class BookService {
         String bookLanguage = bookApiResponse.getVolumeInfo().getLanguage();
         String description = bookApiResponse.getVolumeInfo().getDescription();
         return bookLanguage.equals("en") && description != null;
+    }
+
+    private boolean bookIsUnique(BookApiResponse bookApiResponse) {
+        String bookTitle = bookApiResponse.getVolumeInfo().getTitle();
+        return !bookRepository.existsByTitleIgnoreCase(bookTitle);
     }
 
     private List<BookDTO> getListOfBooksDTO(List<Book> booksList) {
