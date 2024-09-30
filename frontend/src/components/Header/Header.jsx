@@ -16,8 +16,7 @@ function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
                         <Nav.Link as={Link} to="/" className="d-flex align-items-center">
-                            <Home size={18} className="me-1" />
-                            Home
+                            <Home size={18} className="me-1"/>Home
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

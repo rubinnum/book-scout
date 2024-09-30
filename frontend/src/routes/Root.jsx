@@ -11,10 +11,12 @@ function Root() {
     const [categories, setCategories] = useState([]);
 
     return (
-        <Container fluid className="p-0">
+        <div className="d-flex flex-column vh-100">
             <Header/>
-            <Outlet context={{categories, setCategories, setCurrentSubject, books, setBooks}}/>
-        </Container>
+            <Container fluid className="d-flex flex-grow-1 p-0">
+                <Outlet context={{categories, setCategories, setCurrentSubject, books, setBooks}}/>
+            </Container>
+        </div>
     );
 }
 
