@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 
 @AllArgsConstructor
 @Getter
-public class WrongCategoryResponse {
+public class ExceptionResponse {
     private final String message;
     private final HttpStatus httpStatus;
     private final ZonedDateTime zonedDateTime;
