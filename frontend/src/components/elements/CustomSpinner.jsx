@@ -3,7 +3,7 @@ import {Container, Spinner} from "react-bootstrap";
 
 function CustomSpinner() {
     return (
-        <Container className="d-flex align-items-center justify-content-center min-vh-100">
+        <Container className="d-flex align-items-center justify-content-center">
             <Spinner animation="border" variant="light" />
         </Container>
     );

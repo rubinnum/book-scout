@@ -31,7 +31,7 @@ function CategoryBooks() {
 
     // Effect for fetching new batch of books
     useEffect(() => {
-        if (currentIndex === books.length - 1) {
+        if (currentIndex === books.length && books.length !== 0) {
             getBooksBySubject(subject);
             setBatchesNumber(batchesNumber + 1);
         }
@@ -47,6 +47,7 @@ function CategoryBooks() {
         setCurrentIndex={setCurrentIndex}
         subject={subject}
         batchesNumber={batchesNumber}
+        setLoading={setLoading}
     />;
 }
 
