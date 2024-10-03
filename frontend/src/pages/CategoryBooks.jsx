@@ -23,35 +23,29 @@ function CategoryBooks() {
     }
 
     const updateNumberOfDisplayedBooks = async (subject) => {
-        if (currentIndex === 0) {
+        if (!booksInitialized.current || currentIndex === books.length) {
             booksDisplayed.current = await backend_api.get(`/progress/${subject}`).then(response => response.data.booksDisplayed);
         }
-        const currentlyDisplayedBooks = booksDisplayed.current + (currentIndex + 1);
-        console.log("will be sent - " + currentlyDisplayedBooks);
+        const currentlyDisplayedBooks = (currentIndex === books.length) ? (booksDisplayed.current + 1) : (booksDisplayed.current + (currentIndex + 1));
         await backend_api.put(`/progress/${subject}?booksDisplayed=${currentlyDisplayedBooks}`);
     }
 
     const fetchBooks = async () => {
         await getBooksBySubject(subject);
-        console.log("It goes from first");
         await updateNumberOfDisplayedBooks(subject);
+        booksInitialized.current = true;
     }
 
-    // Effect for initial load (only once)
+    // Effect for fetching books
     useEffect(() => {
         if (!booksInitialized.current || (currentIndex === books.length && books.length !== 0)) {
-            console.log("I am here now");
-            booksInitialized.current = true;
-
             fetchBooks();
         }
-
     }, [subject, currentIndex]);
 
-    // Effect for fetching new batch of books
+    // Effect for updating displayed books
     useEffect(() => {
-        if (currentIndex !== 0) {
-            console.log("It goes from second");
+        if (currentIndex !== 0 && currentIndex !== books.length) {
             updateNumberOfDisplayedBooks(subject);
         }
     }, [currentIndex]);
