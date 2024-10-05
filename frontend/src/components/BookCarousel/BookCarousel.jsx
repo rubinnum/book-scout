@@ -1,10 +1,9 @@
 import './BookCarousel.css'
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Button, Container} from "react-bootstrap";
 import BookCard from "../BookCard/BookCard.jsx";
 import {ChevronDown, ChevronUp} from 'lucide-react';
-import backend_api from "../../api/backend_api.js";
 
 function BookCarousel({books, currentIndex, setCurrentIndex, setLoading}) {
 
