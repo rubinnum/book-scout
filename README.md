@@ -3,15 +3,15 @@
 **Book Scout** is an open-source application designed for book lovers who aren’t sure what to read next. Simply choose a category that interests you, and Book Scout will provide a list of relevant books with short descriptions. You can decide whether you're interested in a book by reading its summary, and if you are, tap for more details. This project consists of a **React frontend** and a **Java Spring Boot backend** integrated with the **Google Books API**.
 
 ## Table of Contents
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Getting Started](#getting-started)
+- [Tech Stack](#tech-stack-️)
+- [Features](#features-✨)
+- [Getting Started](#getting-started-)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
-- [Architecture Overview](#architecture-overview)
-- [Contributing](#contributing)
-- [License](#license)
+- [Architecture Overview](#architecture-overview-️)
+- [Contributing](#contributing-)
+- [License](#license-)
 
 ## Tech Stack 🛠️
 
